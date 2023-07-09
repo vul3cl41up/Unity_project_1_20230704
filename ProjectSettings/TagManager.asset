@@ -50,3 +50,6 @@ TagManager:
   - name: floor
     uniqueID: 3255765717
     locked: 0
+  - name: Role
+    uniqueID: 721586985
+    locked: 0

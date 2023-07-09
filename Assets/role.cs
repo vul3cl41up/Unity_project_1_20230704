@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class role : MonoBehaviour
 {
-
-    public Vector3 xv = new Vector3 (0.1f, 0, 0);
-    public Vector3 yv = new Vector3(0, 0.4f, 0);
+    bool isWalk = false;
+    bool isTurn = true;
+    public Animator playAni;
+    //每秒移動幾格
+    public Vector3 v = new Vector3 (5f, 0, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class role : MonoBehaviour
 
     private void FixedUpdate()
     {
+        isWalk = false;
         movement();
     }
 
@@ -27,15 +30,32 @@ public class role : MonoBehaviour
     {
         if (Input.GetKey("right"))  
         {
-            this.gameObject.transform.position += xv;
+            if (!isTurn)
+            {
+                this.gameObject.transform.Rotate(new Vector3(0, 180, 0));
+                isTurn = true;
+            }
+                
+            isWalk = true;
+            this.gameObject.transform.position += v*0.02f;
         }
         if (Input.GetKey("left"))  
         {
-            this.gameObject.transform.position -= xv;
+            if (isTurn)
+            {
+                this.gameObject.transform.Rotate(new Vector3(0, 180, 0));
+                isTurn = false;
+            }
+            isWalk = true;
+            this.gameObject.transform.position -= v*0.02f;
         }
-        if(Input.GetKey("up"))
+        if(isWalk)
         {
-            this.gameObject.transform.position += yv;
+            playAni.SetBool("isWalk", true);
+        }
+        else
+        {
+            playAni.SetBool("isWalk", false);
         }
     }
 }

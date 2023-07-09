@@ -9,12 +9,12 @@ public class MainCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position - Role.transform.position;
+        offset = this.transform.position - Role.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Role.transform.position + offset;
+        this.transform.position = Role.transform.position + offset;
     }
 }

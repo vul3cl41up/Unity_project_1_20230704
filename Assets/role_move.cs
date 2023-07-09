@@ -32,22 +32,22 @@ public class role : MonoBehaviour
         {
             if (!isTurn)
             {
-                this.gameObject.transform.Rotate(new Vector3(0, 180, 0));
+                this.transform.Rotate(new Vector3(0, 180, 0));
                 isTurn = true;
             }
                 
             isWalk = true;
-            this.gameObject.transform.position += v*0.02f;
+            this.transform.position += v*0.02f;
         }
         if (Input.GetKey("left"))  
         {
             if (isTurn)
             {
-                this.gameObject.transform.Rotate(new Vector3(0, 180, 0));
+                this.transform.Rotate(new Vector3(0, 180, 0));
                 isTurn = false;
             }
             isWalk = true;
-            this.gameObject.transform.position -= v*0.02f;
+            this.transform.position -= v*0.02f;
         }
         if(isWalk)
         {

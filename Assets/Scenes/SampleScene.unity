@@ -497,7 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3f1eb315fe1ce438c3639cda4e5a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  v: {x: 0.1, y: 0, z: 0}
+  playAni: {fileID: 0}
+  v: {x: 5, y: 0, z: 0}
 --- !u!212 &2107268104
 SpriteRenderer:
   m_ObjectHideFlags: 0

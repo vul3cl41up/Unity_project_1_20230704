@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
         m_body2D = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
     }
-
+    
     private void Update()
     {
         Debug.Log("1."+LayerMask.NameToLayer("UI"));

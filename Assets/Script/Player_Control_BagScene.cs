@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player_Control_BagScene : MonoBehaviour
@@ -5,16 +6,56 @@ public class Player_Control_BagScene : MonoBehaviour
     [SerializeField, Header("²¾°Ê³t«×")]
     private float speed = 5;
 
-    Rigidbody2D rb;
+    private bool isTouch = false;
+    private GameObject itemObject = null;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    public Inventory myBag;
+
 
     private void Update()
     {
         Move_Transform_1();
+        pickUp();
+    }
+
+    private void pickUp()
+    {
+        if (isTouch && itemObject != null && Input.GetKeyDown(KeyCode.Z)) 
+        {
+            Item item = itemObject.GetComponent<ItemOnWorld>().thisItem;
+            
+            int index = myBag.itemList.FindIndex(x => x == item);
+            if (index != -1)
+                myBag.itemHold[index]++;
+            else
+            {
+                myBag.itemList.Add(item);
+                myBag.itemHold.Add(1);
+            }
+
+            Destroy(itemObject);
+            Inventory_Manager.Refresh();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Prop")
+        {
+            isTouch = true;
+            itemObject = collision.gameObject;
+            print(itemObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Prop")
+        {
+            isTouch = false;
+            itemObject = null;
+
+        }
     }
 
     /// <summary>
